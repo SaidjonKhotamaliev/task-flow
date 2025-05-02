@@ -18,6 +18,4 @@ export interface TaskInput {
   taskStatus?: TaskStatus;
   dueDate: Date;
   boardId: ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
 }

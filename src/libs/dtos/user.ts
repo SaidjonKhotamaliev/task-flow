@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsMongoId,
   IsNotEmpty,
+  IsOptional,
   IsString,
   Length,
   MinLength,
@@ -39,6 +40,7 @@ export class User {
   userBoardsIds: Types.ObjectId[];
 
   @IsString()
+  @IsOptional()
   accessToken?: string;
 
   @IsDate()
@@ -46,4 +48,15 @@ export class User {
 
   @IsDate()
   updatedAt?: Date;
+}
+
+export class LoginInput {
+  @IsNotEmpty()
+  @Length(3, 12)
+  @IsString()
+  userName: string;
+
+  @IsString()
+  @MinLength(6)
+  userPassword: string;
 }

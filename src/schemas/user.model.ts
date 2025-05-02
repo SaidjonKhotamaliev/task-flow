@@ -16,6 +16,7 @@ const UserSchema = new Schema(
     userPassword: {
       type: String,
       required: true,
+      select: false,
     },
 
     userBoardsIds: [

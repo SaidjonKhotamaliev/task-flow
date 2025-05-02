@@ -38,6 +38,9 @@ export class User {
   @IsMongoId({ each: true })
   userBoardsIds: Types.ObjectId[];
 
+  @IsString()
+  accessToken?: string;
+
   @IsDate()
   createdAt?: Date;
 

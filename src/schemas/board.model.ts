@@ -2,18 +2,18 @@ import { Schema } from 'mongoose';
 
 const BoardSchema = new Schema(
   {
-    title: {
+    boardTitle: {
       type: String,
       required: true,
     },
 
-    owner: {
+    boardOwner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
 
-    tasks: [
+    boardTasks: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Task',

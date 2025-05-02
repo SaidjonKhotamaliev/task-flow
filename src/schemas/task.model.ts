@@ -3,26 +3,26 @@ import { TaskStatus } from 'src/libs/enums/task.enum';
 
 const TaskSchema = new Schema(
   {
-    title: {
+    taskTitle: {
       type: String,
       required: true,
     },
 
-    description: {
+    taskDescription: {
       type: String,
     },
 
-    status: {
+    taskStatus: {
       type: String,
       enum: Object.values(TaskStatus),
       default: TaskStatus.TODO,
     },
 
-    dueDate: {
+    taskDueDate: {
       type: Date,
     },
 
-    board: {
+    taskBoard: {
       type: Schema.Types.ObjectId,
       ref: 'Board',
       required: true,

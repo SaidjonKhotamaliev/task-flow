@@ -2,23 +2,23 @@ import { Schema } from 'mongoose';
 
 const UserSchema = new Schema(
   {
-    name: {
+    userName: {
       type: String,
       required: true,
     },
 
-    email: {
+    userEmail: {
       type: String,
       required: true,
       unique: true,
     },
 
-    password: {
+    userPassword: {
       type: String,
       required: true,
     },
 
-    boards: [
+    userBoards: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Board',

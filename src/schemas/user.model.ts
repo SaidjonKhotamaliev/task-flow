@@ -18,7 +18,7 @@ const UserSchema = new Schema(
       required: true,
     },
 
-    userBoards: [
+    userBoardsIds: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Board',

@@ -8,13 +8,13 @@ const TaskSchema = new Schema(
       required: true,
     },
 
-    taskDescription: {
+    taskDesc: {
       type: String,
     },
 
     taskStatus: {
       type: String,
-      enum: Object.values(TaskStatus),
+      enum: TaskStatus,
       default: TaskStatus.TODO,
     },
 

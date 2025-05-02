@@ -7,13 +7,13 @@ const BoardSchema = new Schema(
       required: true,
     },
 
-    boardOwner: {
+    boardOwnerId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
 
-    boardTasks: [
+    boardTasksIds: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Task',

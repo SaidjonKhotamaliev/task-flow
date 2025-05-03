@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { Board, boardInput, boardUpdate } from 'src/libs/dtos/board';
 import { BoardService } from './board.service';
@@ -39,5 +48,16 @@ export class BoardController {
     const userId = req.body.authMember._id;
     input.boardOwnerId = userId;
     return await this.boardService.updateBoard(input);
+  }
+
+  @Delete('deleteBoard/:boardId')
+  @UseGuards(AuthGuard)
+  public async deleteBoard(
+    @Param('boardId') boardId: string,
+    @Req() req: Request,
+  ): Promise<void> {
+    console.log('DELETE, deleteBoard');
+    const userId = req.body.authMember._id;
+    await this.boardService.deleteBoard(userId, boardId);
   }
 }

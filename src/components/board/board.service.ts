@@ -1,6 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, ObjectId } from 'mongoose';
+import { Model, ObjectId, Types } from 'mongoose';
 import { Board, boardInput, boardUpdate } from 'src/libs/dtos/board';
 import { Message, T } from 'src/libs/types/common';
 import { shapeIntoMongoObjectId } from 'src/libs/types/config';
@@ -53,5 +57,14 @@ export class BoardService {
       console.log('Error on  updateBoard', err);
       throw new BadRequestException(err.message);
     }
+  }
+
+  public async deleteBoard(userId: ObjectId, boardId: string): Promise<void> {
+    console.log('passed here');
+    boardId = shapeIntoMongoObjectId(boardId);
+    await this.boardModel.findOneAndDelete({
+      _id: boardId,
+      boardOwnerId: userId,
+    });
   }
 }

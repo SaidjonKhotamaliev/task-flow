@@ -12,6 +12,8 @@ export class BoardController {
   @UseGuards(AuthGuard)
   public async getMyBoards(@Req() req: Request): Promise<Board[]> {
     console.log('GET, getMyBoards');
-    return await this.boardService.getMyBoards();
+    console.log(req.body);
+    const userId = req.body.authMember._id;
+    return await this.boardService.getMyBoards(userId);
   }
 }

@@ -36,7 +36,7 @@ export class UserService {
   }
 
   public async login(input: LoginInput): Promise<User> {
-    const response: User = await this.userModel
+    const response = await this.userModel
       .findOne({ userName: input.userName })
       .select('+userPassword')
       .exec();
@@ -48,10 +48,11 @@ export class UserService {
     if (!isMatch)
       throw new InternalServerErrorException(Message.WRONG_PASSWORD);
 
-    response.accessToken = await this.authService.createToken(response);
+    const accessToken = await this.authService.createToken(response);
 
-    console.log(response.accessToken);
-
-    return response;
+    return {
+      ...response.toObject(),
+      accessToken,
+    };
   }
 }

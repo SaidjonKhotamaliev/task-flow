@@ -8,7 +8,7 @@ import {
   Length,
 } from 'class-validator';
 import { Types } from 'mongoose';
-import { TaskStatus } from '../enums/task.enum';
+import { TaskPriority, TaskStatus } from '../enums/task.enum';
 
 export class taskInput {
   @IsNotEmpty()
@@ -20,9 +20,11 @@ export class taskInput {
   @Length(10, 1000)
   taskDesc: string;
 
-  @IsOptional()
   @IsEnum(TaskStatus)
   taskStatus?: TaskStatus;
+
+  @IsEnum(TaskPriority)
+  taskPriority: TaskPriority;
 
   @IsDate()
   dueDate: Date;

@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { TaskStatus } from 'src/libs/enums/task.enum';
+import { TaskPriority, TaskStatus } from 'src/libs/enums/task.enum';
 
 const TaskSchema = new Schema(
   {
@@ -16,6 +16,11 @@ const TaskSchema = new Schema(
       type: String,
       enum: TaskStatus,
       default: TaskStatus.TODO,
+    },
+
+    taskPriority: {
+      type: String,
+      enum: TaskPriority,
     },
 
     taskDueDate: {

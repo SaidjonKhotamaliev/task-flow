@@ -47,6 +47,7 @@ export class BoardService {
         _id: input._id,
         boardOwnerId: input.boardOwnerId,
       };
+      console.log('input: ', input);
 
       const result = await this.boardModel.findOneAndUpdate(search, input, {
         new: true,

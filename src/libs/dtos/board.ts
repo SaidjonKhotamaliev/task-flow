@@ -17,6 +17,20 @@ export class boardInput {
   boardOwnerId: Types.ObjectId;
 }
 
+export class boardUpdate {
+  @IsNotEmpty()
+  @IsMongoId()
+  _id: ObjectId;
+
+  @IsNotEmpty()
+  @Length(2, 100)
+  @IsString()
+  boardTitle: string;
+
+  @IsMongoId()
+  boardOwnerId: Types.ObjectId;
+}
+
 export class Board {
   @IsMongoId()
   _id: ObjectId;

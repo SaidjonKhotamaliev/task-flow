@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { Board, boardInput } from 'src/libs/dtos/board';
+import { Board, boardInput, boardUpdate } from 'src/libs/dtos/board';
 import { BoardService } from './board.service';
 import { Request } from 'express';
 
@@ -27,5 +27,17 @@ export class BoardController {
     const userId = req.body.authMember._id;
     input.boardOwnerId = userId;
     return await this.boardService.createBoard(input);
+  }
+
+  @Post('updateBoard')
+  @UseGuards(AuthGuard)
+  public async updateBoard(
+    @Body() input: boardUpdate,
+    @Req() req: Request,
+  ): Promise<Board> {
+    console.log('POST, updateBoard');
+    const userId = req.body.authMember._id;
+    input.boardOwnerId = userId;
+    return await this.boardService.updateBoard(input);
   }
 }

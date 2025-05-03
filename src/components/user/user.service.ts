@@ -22,9 +22,13 @@ export class UserService {
     );
     try {
       const result = await this.userModel.create(input);
-      result.accessToken = await this.authService.createToken(result);
+      const accessToken = await this.authService.createToken(result);
+      console.log('result', result);
 
-      return result;
+      return {
+        ...result.toObject(),
+        accessToken,
+      };
     } catch (err) {
       console.log('Error, Service model: ', err.message);
       throw new BadRequestException(Message.USED_NICK_PHONE);

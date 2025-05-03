@@ -41,20 +41,20 @@ export class taskUpdate {
   @IsNotEmpty()
   @Length(2, 100)
   @IsString()
-  taskTitle: string;
+  taskTitle?: string;
 
   @IsString()
   @Length(10, 1000)
-  taskDesc: string;
+  taskDesc?: string;
 
   @IsEnum(TaskStatus)
   taskStatus?: TaskStatus;
 
   @IsEnum(TaskPriority)
-  taskPriority: TaskPriority;
+  taskPriority?: TaskPriority;
 
   @IsDate()
-  taskDueDate: Date;
+  taskDueDate?: Date;
 
   @IsMongoId()
   boardId: Types.ObjectId;

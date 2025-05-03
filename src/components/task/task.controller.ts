@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
-import { Task, taskInput } from 'src/libs/dtos/task';
+import { Task, taskInput, taskUpdate } from 'src/libs/dtos/task';
 import { TaskService } from './task.service';
 import { Request } from 'express';
 import { ObjectId } from 'mongoose';
@@ -37,15 +37,13 @@ export class TaskController {
     return await this.taskService.getMyTasks(boardId);
   }
 
-  //   @Post('updateTask')
-  //   @UseGuards(AuthGuard)
-  //   public async updateBoard(
-  //     @Body() input: boardUpdate,
-  //     @Req() req: Request,
-  //   ): Promise<Task> {
-  //     console.log('POST, updateTask');
-  //     // const userId = req.body.authMember._id;
-  //     // input.boardOwnerId = userId;
-  //     return await this.taskService.updateTask(input);
-  //   }
+  @Post('updateTask')
+  @UseGuards(AuthGuard)
+  public async updateBoard(@Body() input: taskUpdate): Promise<Task> {
+    console.log('POST, updateTask');
+    if (!input.boardId) {
+      throw new BadRequestException('boardId is required');
+    }
+    return await this.taskService.updateTask(input);
+  }
 }

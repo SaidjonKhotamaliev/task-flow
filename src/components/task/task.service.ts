@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
-import { Task, taskInput } from 'src/libs/dtos/task';
+import { Task, taskInput, taskUpdate } from 'src/libs/dtos/task';
+import { T } from 'src/libs/types/common';
 import { shapeIntoMongoObjectId } from 'src/libs/types/config';
 
 @Injectable()
@@ -30,6 +31,24 @@ export class TaskService {
       return result;
     } catch (err) {
       console.log('Error on  getMyTasks', err);
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  public async updateTask(input: taskUpdate): Promise<Task> {
+    try {
+      const search: T = {
+        _id: input._id,
+        boardId: input.boardId,
+      };
+
+      const result = await this.boardModel.findOneAndUpdate(search, input, {
+        new: true,
+      });
+
+      return result;
+    } catch (err) {
+      console.log('Error on  updateTask', err);
       throw new BadRequestException(err.message);
     }
   }

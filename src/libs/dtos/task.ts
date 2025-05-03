@@ -7,7 +7,7 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { Types } from 'mongoose';
+import { ObjectId, Types } from 'mongoose';
 import { TaskPriority, TaskStatus } from '../enums/task.enum';
 
 export class taskInput {
@@ -27,7 +27,34 @@ export class taskInput {
   taskPriority: TaskPriority;
 
   @IsDate()
-  dueDate: Date;
+  taskDueDate: Date;
+
+  @IsMongoId()
+  boardId: Types.ObjectId;
+}
+
+export class taskUpdate {
+  @IsNotEmpty()
+  @IsMongoId()
+  _id: ObjectId;
+
+  @IsNotEmpty()
+  @Length(2, 100)
+  @IsString()
+  taskTitle: string;
+
+  @IsString()
+  @Length(10, 1000)
+  taskDesc: string;
+
+  @IsEnum(TaskStatus)
+  taskStatus?: TaskStatus;
+
+  @IsEnum(TaskPriority)
+  taskPriority: TaskPriority;
+
+  @IsDate()
+  taskDueDate: Date;
 
   @IsMongoId()
   boardId: Types.ObjectId;
@@ -42,6 +69,9 @@ export class Task {
 
   @IsEnum(TaskStatus)
   taskStatus: TaskStatus;
+
+  @IsEnum(TaskPriority)
+  taskPriority: TaskPriority;
 
   @IsMongoId()
   boardId: Types.ObjectId[];

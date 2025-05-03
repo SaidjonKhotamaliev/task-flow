@@ -10,6 +10,7 @@ const TaskSchema = new Schema(
 
     taskDesc: {
       type: String,
+      required: true,
     },
 
     taskStatus: {
@@ -21,13 +22,15 @@ const TaskSchema = new Schema(
     taskPriority: {
       type: String,
       enum: TaskPriority,
+      required: true,
     },
 
     taskDueDate: {
       type: Date,
+      required: true,
     },
 
-    taskBoard: {
+    boardId: {
       type: Schema.Types.ObjectId,
       ref: 'Board',
       required: true,

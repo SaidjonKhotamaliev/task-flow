@@ -5,6 +5,7 @@ export enum TaskStatus {
 }
 
 export enum TaskPriority {
+  HIGHEST_PRIORITY = 'highest-priority',
   HIGH_PRIORITY = 'high-priority',
   MEDIUM_PRIORITY = 'medium-priority',
   LOW_PRIORITY = 'low-priority',

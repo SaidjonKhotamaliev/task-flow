@@ -3,10 +3,13 @@ import { BoardService } from './board.service';
 import { BoardController } from './board.controller';
 import BoardSchema from 'src/schemas/board.model';
 import { MongooseModule } from '@nestjs/mongoose';
-import { TaskService } from '../task/task.service';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Task', schema: BoardSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: 'Board', schema: BoardSchema }]),
+    AuthModule,
+  ],
   providers: [BoardService],
   controllers: [BoardController],
   exports: [BoardService],

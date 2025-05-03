@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { User } from 'src/libs/dtos/user';
 import { T } from 'src/libs/types/common';
+import { shapeIntoMongoObjectId } from 'src/libs/types/config';
 
 @Injectable()
 export class AuthService {
@@ -27,9 +28,9 @@ export class AuthService {
     console.log('payload: ', payload);
     return await this.jwtService.signAsync(payload);
   }
-  //   public async verifyToken(token: string): Promise<Member> {
-  //     const member = await this.jwtService.verifyAsync(token);
-  //     member._id = shapeIntoMongoObjectId(member._id);
-  //     return member;
-  //   }
+  public async verifyToken(token: string): Promise<User> {
+    const user = await this.jwtService.verifyAsync(token);
+    user._id = shapeIntoMongoObjectId(user._id);
+    return user;
+  }
 }

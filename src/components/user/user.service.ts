@@ -46,6 +46,8 @@ export class UserService {
 
     response.accessToken = await this.authService.createToken(response);
 
+    console.log(response.accessToken);
+
     return response;
   }
 }

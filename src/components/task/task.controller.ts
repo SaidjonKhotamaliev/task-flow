@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Query,
   Req,
@@ -45,5 +47,12 @@ export class TaskController {
       throw new BadRequestException('boardId is required');
     }
     return await this.taskService.updateTask(input);
+  }
+
+  @Delete('deleteTask/:taskId')
+  @UseGuards(AuthGuard)
+  public async deleteTask(@Param('taskId') boardId: string): Promise<void> {
+    console.log('DELETE, deleteTask');
+    await this.taskService.deleteTask(boardId);
   }
 }

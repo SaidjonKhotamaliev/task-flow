@@ -39,7 +39,6 @@ export class TaskService {
     try {
       const search: T = {
         _id: input._id,
-        boardId: input.boardId,
       };
 
       const result = await this.taskModel.findOneAndUpdate(search, input, {

@@ -36,15 +36,12 @@ export class taskInput {
 export class taskUpdate {
   @IsNotEmpty()
   @IsMongoId()
-  _id: ObjectId;
+  _id: string;
 
-  @IsNotEmpty()
-  @Length(2, 100)
   @IsString()
   taskTitle?: string;
 
   @IsString()
-  @Length(10, 1000)
   taskDesc?: string;
 
   @IsEnum(TaskStatus)
@@ -55,9 +52,6 @@ export class taskUpdate {
 
   @IsDate()
   taskDueDate?: Date;
-
-  @IsMongoId()
-  boardId: Types.ObjectId;
 }
 
 export class Task {

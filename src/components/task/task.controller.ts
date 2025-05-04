@@ -41,10 +41,10 @@ export class TaskController {
 
   @Post('updateTask')
   @UseGuards(AuthGuard)
-  public async updateBoard(@Body() input: taskUpdate): Promise<Task> {
+  public async updateTask(@Body() input: taskUpdate): Promise<Task> {
     console.log('POST, updateTask');
-    if (!input.boardId) {
-      throw new BadRequestException('boardId is required');
+    if (!input._id) {
+      throw new BadRequestException('id is required');
     }
     return await this.taskService.updateTask(input);
   }
